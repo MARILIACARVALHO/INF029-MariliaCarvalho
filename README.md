@@ -1,2 +1,2 @@
 # INF029-MariliaCarvalho
-"Projeto Escola" da Disciplina Laboratório de Programação do curso Análise e Desenvolvimento de Sistemas da Instituto Federal da Bahia (IFBA) 
+Projetos da Disciplina Laboratório de Programação do curso Análise e Desenvolvimento de Sistemas da Instituto Federal da Bahia (IFBA) 
