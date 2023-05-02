@@ -1,3 +1,10 @@
+/* ARQUIVO "run.sh" pra rodar automaticamente com o botão RUN:
+cd PROJETO_ESCOLA
+gcc REV_10.c -o REV_10
+./REV_10
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 //#include <string.h>
@@ -75,7 +82,8 @@ void excluirDisciplina(Disciplina *listaDisciplina, int *qtdDisciplinas);
 void atualizarDisciplina(Disciplina *listaDisciplina, int *qtdDisciplinas);
 //-------------------------------------------------------------------------
 
-int main(void) {
+//ALTERAR PARA main:
+int main1(void) {
 
   Aluno listaAluno[TamAluno];
   int qtdAlunos[1];
