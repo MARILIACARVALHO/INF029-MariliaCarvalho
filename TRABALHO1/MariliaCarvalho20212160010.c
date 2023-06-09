@@ -25,6 +25,10 @@
 #include "MariliaCarvalho20212160010.h" // Substitua pelo seu arquivo de header renomeado
 #include <stdio.h>
 #include <stdlib.h>
+
+#include <math.h>
+#include <string.h>
+
 /*
 ## função utilizada para testes  ##
 
@@ -266,47 +270,42 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]) {
   anoF = DataFinalQuebrada.iAno;
 
   dma.qtdDias = 0;
-	dma.qtdMeses = 0;
-	dma.qtdAnos = 0;
-  
+  dma.qtdMeses = 0;
+  dma.qtdAnos = 0;
+
   /*dma.qtdDias = datainicial.iDia;
   dma.qtdMeses = datainicial.iMes;
   dma.qtdAnos = datainicial.iAno;*/
 
-
   if (q1(datainicial) == 0) {
     dma.retorno = 2;
     return dma;
-  } 
-  else if (q1(datafinal) == 0) {
+  } else if (q1(datafinal) == 0) {
     dma.retorno = 3;
     return dma;
-  } 
-  else {
+  } else {
     // verifique se a data final não é menor que a data inicial:
-    if (anoF < anoI){
+    if (anoF < anoI) {
       dma.retorno = 4;
       return dma;
-    } 
-    else if ((anoF=anoI) && (mesF<mesI)){
+    } else if ((anoF = anoI) && (mesF < mesI)) {
       dma.retorno = 4;
       return dma;
-    } 
-    else if ((anoF=anoI) && (mesF=mesI) && (diaF<diaI)){
+    } else if ((anoF = anoI) && (mesF = mesI) && (diaF < diaI)) {
       dma.retorno = 4;
       return dma;
-    }  
+    }
     // calcule a distancia entre as datas
-    else{
+    else {
       dma.qtdDias = diaF - diaI;
-	    dma.qtdMeses = mesF - mesI;
-	    dma.qtdAnos = anoF - anoI;
+      dma.qtdMeses = mesF - mesI;
+      dma.qtdAnos = anoF - anoI;
 
       // se tudo der certo:
-      if ((dma.qtdDias>=0) && (dma.qtdMeses>=0) && (dma.qtdAnos>=0)){
-      dma.retorno = 1;
-      return dma;
-      }    
+      if ((dma.qtdDias >= 0) && (dma.qtdMeses >= 0) && (dma.qtdAnos >= 0)) {
+        dma.retorno = 1;
+        return dma;
+      }
     }
   }
 }
@@ -324,35 +323,36 @@ DiasMesesAnos q2(char datainicial[], char datafinal[]) {
     Um número n >= 0.
  */
 int q3(char *texto, char c, int isCaseSensitive) {
-  
+
   int qtdOcorrencias = 0;
   char textoCop[strlen(texto)];
   int i, j;
 
-  if(isCaseSensitive==1){ // Considerar diferenças entre maiúsculas e minúsculas
-        for(i = 0; i < strlen(texto); i++){
-            if(c == texto[i]){
-                qtdOcorrencias++;
-			      }
-        }
-  }else{
-    for(j = 0; j < strlen(texto); j++){
-			textoCop[j] = texto[j];
-		}
-		textoCop[j] = '\0';
-		
-    for(i = 0; i < j; i++){
-      if(textoCop[i] >= 65 && textoCop[i] <= 90)
-      textoCop[i] = texto[i] + 32;
-	  }
-		texto[i] = '\0';
-		
-		if(c >= 65 && c <= 90)
-		    c = c + 32;
-		    
-		for(i = 0; i < strlen(texto); i++){
-      if(c == textoCop[i])
-          qtdOcorrencias++;
+  if (isCaseSensitive ==
+      1) { // Considerar diferenças entre maiúsculas e minúsculas
+    for (i = 0; i < strlen(texto); i++) {
+      if (c == texto[i]) {
+        qtdOcorrencias++;
+      }
+    }
+  } else {
+    for (j = 0; j < strlen(texto); j++) {
+      textoCop[j] = texto[j];
+    }
+    textoCop[j] = '\0';
+
+    for (i = 0; i < j; i++) {
+      if (textoCop[i] >= 65 && textoCop[i] <= 90)
+        textoCop[i] = texto[i] + 32;
+    }
+    texto[i] = '\0';
+
+    if (c >= 65 && c <= 90)
+      c = c + 32;
+
+    for (i = 0; i < strlen(texto); i++) {
+      if (c == textoCop[i])
+        qtdOcorrencias++;
     }
   }
   return qtdOcorrencias;
@@ -381,51 +381,51 @@ int q3(char *texto, char c, int isCaseSensitive) {
 
  */
 int q4(char *strTexto, char *strBusca, int posicoes[30]) {
-  
+
   int qtdOcorrencias = 0;
 
   int i, j, aux, aux2;
   int k = 0;
 
-	int auxiliarStr[250];
-	int auxiliarBsc[250];
+  int auxiliarStr[250];
+  int auxiliarBsc[250];
   int m, n = 0;
 
-  //Remover acentos do texto:
-  for(m = 0; m < strlen(strTexto); m++){
-    if(strTexto[m] != -61){
+  // Remover acentos do texto:
+  for (m = 0; m < strlen(strTexto); m++) {
+    if (strTexto[m] != -61) {
       auxiliarStr[n] = strTexto[m];
       n++;
     }
   }
 
-  //Remover acentos da busca:
-	n = 0;
-	for(m = 0; m < strlen(strBusca); m++){
-    if(strBusca[m] != -61){
+  // Remover acentos da busca:
+  n = 0;
+  for (m = 0; m < strlen(strBusca); m++) {
+    if (strBusca[m] != -61) {
       auxiliarBsc[n] = strBusca[m];
       n++;
     }
   }
 
   // Busca no texto e salva as posições inicial e final
-  for(i = 0, j = 0; i < strlen(strTexto); i++){
-    if(auxiliarBsc[j] == auxiliarStr[i]){
-        aux = i + 1;
-        while(auxiliarBsc[j] == auxiliarStr[i] && j < n){
-          i++;
-          j++;
-        }
-        aux2 = i;
-        i--;
-        if(aux2 - aux + 1 == strlen(strBusca)){
-          posicoes[k] = aux;
-          k++;
-          posicoes[k] = aux2;
-          k++;
-          qtdOcorrencias++;
-        }
+  for (i = 0, j = 0; i < strlen(strTexto); i++) {
+    if (auxiliarBsc[j] == auxiliarStr[i]) {
+      aux = i + 1;
+      while (auxiliarBsc[j] == auxiliarStr[i] && j < n) {
+        i++;
+        j++;
       }
+      aux2 = i;
+      i--;
+      if (aux2 - aux + 1 == strlen(strBusca)) {
+        posicoes[k] = aux;
+        k++;
+        posicoes[k] = aux2;
+        k++;
+        qtdOcorrencias++;
+      }
+    }
     j = 0;
   }
   return qtdOcorrencias;
@@ -441,24 +441,42 @@ int q4(char *strTexto, char *strBusca, int posicoes[30]) {
     Número invertido
  */
 
-int q5(int num) { 
+double potenciacao(double base, int expoente) { // Função para a questão 5
+  double resultado = 1.0;
+
+  if (expoente >= 0) {
+    for (int i = 0; i < expoente; i++) {
+      resultado *= base;
+    }
+  } else {
+    for (int i = 0; i < -expoente; i++) {
+      resultado /= base;
+    }
+  }
+
+  return resultado;
+}
+
+int q5(int num) {
   int digitos = 0;
-	int invertido = 0, copia = num;
-  int i;
- 
+  int invertido = 0, copia = num;
+  int i; // TALVEZ deva ser double
+
   // Conta quantos dígitos o número tem:
-  while (copia != 0){
+  while (copia != 0) {
     digitos++;
     copia = copia / 10;
   }
-    
+
   // Multiplica o número pela potência equivalente à sua posição
-  for(i = digitos - 1; i >= 0; i--){
-    invertido = invertido + ((num % 10) * pow(10, i));
+
+  for (i = digitos - 1; i >= 0; i--) {
+    invertido = invertido + ((num % 10) * potenciacao(10, i));
     num = num / 10;
   }
+
   num = invertido;
-  return num; 
+  return num;
 }
 
 /*
@@ -472,39 +490,40 @@ int q5(int num) {
  */
 
 int q6(int numerobase, int numerobusca) {
-  
-  int qtdOcorrencias=0;
+
+  int qtdOcorrencias = 0;
 
   int decompBase[10], decompBusca[10], i, j;
   int inBsc = 0, inBas = 0;
 
   // Vetor com o numero base decomposto
-  while(numerobase > 0){
+  while (numerobase > 0) {
     decompBase[inBas] = numerobase % 10;
     inBas++;
     numerobase = numerobase / 10;
   }
 
   // Vetor com o numero de busca decomposto
-  while(numerobusca > 0){
+  while (numerobusca > 0) {
     decompBusca[inBsc] = numerobusca % 10;
     inBsc++;
     numerobusca = numerobusca / 10;
   }
 
-  // Teste de quantas vezes o numero se repete, considerando o tamanho dos vetores
-  for(i = 0, j = 0; i < inBas; i++){
-    if(decompBase[i] == decompBusca[j]){
-      while(decompBase[i] == decompBusca[j] && j < inBsc){
+  // Teste de quantas vezes o numero se repete, considerando o tamanho dos
+  // vetores
+  for (i = 0, j = 0; i < inBas; i++) {
+    if (decompBase[i] == decompBusca[j]) {
+      while (decompBase[i] == decompBusca[j] && j < inBsc) {
         i++;
         j++;
       }
-  		i--;
-  		if(j == inBsc){
-  	    qtdOcorrencias++;
-  	  }
+      i--;
+      if (j == inBsc) {
+        qtdOcorrencias++;
+      }
     }
-  j = 0;
-	}
+    j = 0;
+  }
   return qtdOcorrencias;
 }
